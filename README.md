@@ -9,5 +9,6 @@ O servidor tem duas rotas de acesso ("/" e "/health") simplificadas para criaç�
 ■ A validação V3 ocorre na rota "/mail/validation/v3" e analisa o emails utilizando a api pública EVA https://eva.pingutil.com/.
 A resposta HTTP da API foi obtida corretamenta, entretanto a resposta HTTP final não foi bem sucedida devido a dificuldade de recuperar cada parâmetro no código. A requisição passa os endereços de email como um array, assim múltiplos emails podem ser avaliados com apenas uma requisição (é importante ressaltar que esse detalhe não interferiu no erro da resposta HTTP).
 
-A implementação descrita acima contempla as tarefas 1, 2, 3, 4 e 5 do desafio. As tarefas 6 e 7, que se relacionavam ao banco de dados para a validação V3, não foram implementadas por dificuldades relacionadas a sintaxe e a estrutura da API na passagem das informações. As tarefas 8, 9 e 10 foram deixadas como última prioridade pois não havia experiência prévia com as ferramentas utilizadas, por isso não foram implementadas. 
-Portanto, ficou faltando implementar as tarefas restantes e corrigir os erros apresentados.
+A implementação descrita acima contempla as tarefas 1, 2, 3, 4 e 5 do desafio, com a ressalva dos problemas apresentados. As tarefas 6 e 7, que se relacionavam ao banco de dados para a validação V3, não foram implementadas por dificuldades relacionadas a sintaxe e a estrutura da API na tarefa 3. As tarefas 8, 9 e 10 foram deixadas como última prioridade pois não havia experiência prévia com as ferramentas utilizadas, por isso não chegaram a ser implementadas. 
+
+Em resumo, ficou faltando implementar as tarefas restantes e corrigir os erros apresentados para que o desafio pudesse ser completado.
