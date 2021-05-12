@@ -29,13 +29,15 @@ def health():
 def mail_validation():
     request_data = request.get_json()
     email_adress = request_data['email_adress']
-    if(email_adress.endswith('.com') or 
-    email_adress.endswith('.com.br') or
-    email_adress.endswith('.gov.br') or
-    email_adress.endswith('.org')):
-        valid_syntax = True
-    else:
-        valid_syntax = False
+    valid_syntax = []
+    for x in email_adress:
+        if(x.endswith('.com') or 
+        x.endswith('.com.br') or
+        x.endswith('.gov.br') or
+        x.endswith('.org')):
+            valid_syntax.append(True)
+        else:
+            valid_syntax.append(False)
     results = {
         "email_adress": email_adress,
         "domain": "mail",
