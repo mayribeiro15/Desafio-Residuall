@@ -1,5 +1,7 @@
 from flask import Flask
 from flask import request
+import http.client
+import mimetypes
 app = Flask(__name__)
 
 HOSTNAME = 'localhost'
@@ -43,6 +45,30 @@ def mail_validation():
         "domain": "mail",
         "valid_syntax": valid_syntax
     }
+    data = {
+        "status": "OK",
+        "code": 200,
+        "results": results
+    }
+    return data
+
+@app.route('/mail/validation/v3', methods=['POST'])
+def mail_validation_api():
+    request_data = request.get_json()
+    email_adress = request_data['email_adress']
+    results = []
+
+    for x in email_adress:
+        #Trecho copiado da documentação da API
+        conn = http.client.HTTPSConnection("api.eva.pingutil.com")
+        payload = ''
+        headers = {}
+        conn.request("GET", "/email?email="+x, payload, headers)
+        res = conn.getresponse()
+        ans = res.read()
+        results.append(ans.decode("utf-8"))
+
+
     data = {
         "status": "OK",
         "code": 200,
