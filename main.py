@@ -1,9 +1,16 @@
 from flask import Flask
 from flask import request
 import http.client
-import mimetypes
-app = Flask(__name__)
+import pymongo
 
+#DataBaseInfo
+mongo = pymongo.MongoClient("mongodb://localhost:27017/")
+database = mongo["validation"]
+tablev1 = database["validation_v1"]
+tablev3 = database["validation_v3"]
+
+#APIInfo
+app = Flask(__name__)
 HOSTNAME = 'localhost'
 PORTNUMBER = 8000
 
@@ -32,14 +39,23 @@ def mail_validation():
     request_data = request.get_json()
     email_adress = request_data['email_adress']
     valid_syntax = []
+
     for x in email_adress:
         if(x.endswith('.com') or 
         x.endswith('.com.br') or
         x.endswith('.gov.br') or
         x.endswith('.org')):
-            valid_syntax.append(True)
+            y=True
         else:
-            valid_syntax.append(False)
+            y=False
+        valid_syntax.append(y)
+        tableinfo = {
+        "email_adress": x,
+        "domain": "mail",
+        "valid_syntax": y
+        }
+        tablev1.insert(tableinfo)
+
     results = {
         "email_adress": email_adress,
         "domain": "mail",
@@ -66,8 +82,8 @@ def mail_validation_api():
         conn.request("GET", "/email?email="+x, payload, headers)
         res = conn.getresponse()
         ans = res.read()
+        
         results.append(ans.decode("utf-8"))
-
 
     data = {
         "status": "OK",
