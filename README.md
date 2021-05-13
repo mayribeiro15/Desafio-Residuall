@@ -1,4 +1,4 @@
-# Desafio-Residuall
+# Desafio Residuall Backend
  
 O código em Python se refere a resolução do desafio de BackEnd da Residuall, com o objetivo de criar um pequeno servidor que retorna se um email é válido ou não.
 
